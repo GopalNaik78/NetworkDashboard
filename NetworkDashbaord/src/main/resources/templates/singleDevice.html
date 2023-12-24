@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Devices</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon-16x16.png">
+    <link rel="manifest" href="/logo/site.webmanifest">
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/flickity@2/dist/flickity.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment"></script>
+    <!--    <link rel="stylesheet"  th:href="@{/style.css}">-->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
+      body {
+        background-color: #fff;
+      }
+      
+      
+      .box1,
+      .B4B {
+        padding-top: 35px;
+        position: relative;
+      }
+      .alert-info,
+      .device {
+        position: relative;
+      }
+      .Alert-table {
+        padding-top: 45px;
+      }
+      .header {
+        text-align: center;
+        background-color: rgba(255,255,255,255);
+        /* border-bottom: 1px solid black; */
+        margin-bottom: 1.2rem;
+        box-shadow: 1px 4px 5px rgb(133, 133, 133);
+      }
+      .heading-1 {
+        font-size: small;
+        font-weight: 150;
+        color: #fff;
+        border: 0;
+        background-color: rgb(4, 160, 219);
+        padding: 0.5rem 0.9rem 0.5rem 0.9rem;
+        border-radius: 1rem;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 8px;
+        z-index: 2;
+      }
+      h2 {
+        color: #242424;
+        padding: 1rem;
+      }
+
+      #select-3-container,
+      #select-1-container,
+      #select-5-container,
+      #select-6-container,
+      #select-7-container {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 7px 7px 0 0;
+        z-index: 2;
+      }
+
+      .heading-2 {
+        position: absolute;
+        padding: 0.5rem 1rem 0.5rem 1rem;
+        font-size: medium;
+        margin-top: 20px;
+        background-color: rgb(36, 36, 36);
+      }
+      .block-2,
+      .block-3,
+      .block-41,
+      .block-42 {
+        display: grid;
+        grid-gap: 1rem;
+        grid-template-columns: 1fr 1fr;
+        margin: 0 1rem 0 1rem;
+      }
+      .box1,
+      .B4B
+       {
+        border: 1px solid black;
+        border-radius: 0.5rem;
+        background-color: rgba(242,243,243,255);
+        box-shadow: 1px 0px 2px rgb(194, 194, 194);
+      }
+      .box1{
+        background-color: #fff;
+      }
+
+      .device,
+      .alert-info {
+        display: grid;
+        grid-gap: 1rem;
+        grid-template-columns: 1fr 1fr;
+      }
+      .block-4 {
+        position: relative;
+      }
+      .block-42,
+      .block-3 {  
+        margin-top: 1rem;
+      }
+      .block-41 {
+        padding-top: 4rem;
+      }
+
+      .basicInfo,
+      .img1,
+      .alert-chart,
+      .alert-chartInfo {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        font-size: medium;
+        font-weight: 550;
+        padding: 1rem;
+      }
+
+      #alert-chart1 {
+        float: right;
+        width: 100px; /* Adjust the width as needed */
+        height: 50px; /* Adjust the height as needed */
+      }
+      .alert-chart {
+        height: 250px;
+        width: auto;
+      }
+      img {
+        width: 180px;
+      }
+      .img1,
+      .alert-chart {
+        align-items: end;
+      }
+      .status {
+        display: flex;
+        margin: 0;
+        padding-top: 5px;
+        align-items: center;
+      }
+      .box {
+        margin-right: 0.4rem;
+        height: 1.2rem;
+        width: 3rem;
+        border: 2px solid rgb(223, 223, 223);
+      }
+      .green-box {
+        background-color: green;
+      }
+      .red-box {
+        background-color: red;
+      }
+      .blue-box {
+        background-color: rgb(0, 234, 255);
+      }
+      .orange-box {
+        background-color: orange;
+      }
+      .tableFixHead {
+        overflow-y: auto;
+        height: 300px;
+      }
+      .tableFixHead thead th {
+        position: sticky;
+        top: 0px;
+      }
+      .table1 {
+        font-size: 0.8em;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 6px;
+        text-align: center;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h2>Network Dashboard</h2>
+      <div id="select-1-container">
+        <select name="devices" id="select-1">
+          
+        </select>
+      </div>
+    </div>
+    <div class="block-2">
+      <div class="device box1">
+        <button class="heading-1" id="ntwTrafficBtn">Device Information</button>
+        <div class="img1"></div>
+        <div class="basicInfo"></div>
+      </div>
+      <div class="alert-info box1">
+        <button class="heading-1">Alert</button>
+        <div class="alert-chart">
+          <canvas id="alert-chart1" height="50" width="50"></canvas>
+        </div>
+        <div class="alert-chartInfo"></div>
+      </div>
+    </div>
+    <div class="block-3">
+      <div class="barChart box1">
+        <button class="heading-1">Network Traffic</button>
+        <canvas class="B4" id="lineChart-0"></canvas>
+      </div>
+      <div class="Alert-table box1">
+        <button class="heading-1">Alert Table</button>
+        <div id="select-3-container">
+          <select name="all-devices-selecter" id="select-3">
+            <option value="Active" selected="selected">Active</option>
+            <option value="Solved">Solved</option>
+            <option value="Critical">Critical</option>
+            <option value="Warning">Warning</option>
+            <option value="Active & Critical">Active & Critical</option>
+            <option value="Active & Warning">Active & Warning</option>
+            <option value="Solved & Critical">Solved & Critical</option>
+            <option value="Solved & Warning">Solved & Warning</option>
+            <option value="All">All</option>
+          </select>
+        </div>
+        <div class="tableFixHead">
+          <table class="table1">
+            <thead>
+              <tr class="thead-tr">
+                <th>AlertID</th>
+                <th>DeviceID</th>
+                <th>Message</th>
+                <th>Status</th>
+                <th>Review Status</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="block-4 set4">
+      <button class="heading-1 heading-2" id="healthBtn">Health Monitor</button>
+      <div class="block-41">
+        <div class="packetLoss B4B">
+          <button class="heading-1">Packet Loss Rate</button>
+          <canvas class="B4" id="lineChart-1"></canvas>
+        </div>
+        <div class="throughput B4B">
+          <button class="heading-1">Throughput</button>
+          <canvas class="B4" id="lineChart-2"></canvas>
+        </div>
+      </div>
+      <div class="block-42">
+        <div class="latency B4B">
+          <button class="heading-1">Latency</button>
+          <canvas class="B4" id="lineChart-3"></canvas>
+        </div>
+        <div class="uptime B4B">
+          <button class="heading-1">Uptime</button>
+          <canvas class="B4" id="lineChart-4"></canvas>
+        </div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment"></script>
+    <script th:inline="javascript">
+      document.addEventListener("DOMContentLoaded", function () {
+        const select1 = document.getElementById("select-1");
+        const select3 = document.getElementById("select-3");
+        var urlParams = new URLSearchParams(window.location.search);
+        let DeviceID = urlParams.get('imgId');
+
+        fetch("/network/devices-ids")
+          .then((response) => response.json())
+          .then((devicesIds) => {
+            devicesIds.forEach((deviceId) => {
+              const option = document.createElement("option");
+              option.value = deviceId;
+              option.text = `Device ${deviceId}`;
+              if (deviceId == DeviceID) {
+                option.selected = "selected";
+              }
+              select1.add(option);
+            });
+          });
+
+        function addBasic(deviceId) {
+          const basic = document.querySelector(".basicInfo");
+          const img1 = document.querySelector(".img1");
+          fetch(`/network/deviceInfo/${deviceId}`)
+            .then((response) => response.json())
+            .then((deviceData) => {
+              basic.innerHTML = `ID        : ${deviceData.deviceID} <br>
+              Name             : ${deviceData.devicename}<br>
+              Type             : ${deviceData.devicetype}<br>
+              IPAddress        : ${deviceData.ipaddress}<br>
+              Inbound Traffic   : ${deviceData.inboundTraffic} (Kbps)<br>
+              Outbound traffic  : ${deviceData.outboundTraffic} (Kbps)<br>
+              Status           : ${deviceData.devicestatus}`;
+              img1.innerHTML = `<img class="divImg" src="/images/${deviceData.devicetype.toLowerCase()}.png" alt="${
+                deviceData.devicetype
+              }">`;
+            });
+        }
+
+        function renderDonutChart(chartId, alertData) {
+          const existingChart = Chart.getChart(chartId);
+          if (existingChart) {
+            existingChart.destroy();
+          }
+          const data = {
+            labels: [
+              "Critical-Active",
+              "Warning-Active",
+              "Critical-Solved",
+              "Warning-Solved",
+            ],
+            datasets: [
+              {
+                data: [
+                  alertData.criticalAct,
+                  alertData.warningAct,
+                  alertData.criticalSol,
+                  alertData.warningSol,
+                ], // Adjust the values as needed
+                backgroundColor: ["red", "orange", "rgb(0, 234, 255)", "green"], // Adjust colors as needed
+                // borderColor:black,
+                borderWidth: 1,
+              },
+            ],
+          }; // Configuration for the chart
+          const options = {
+            animation: {
+              duration: 2000,
+              animateRotate: true,
+              animateScale: true,
+            },
+            cutout: 52,
+            plugins: {
+              legend: {
+                display: false,
+              },
+              tooltip: {
+                enabled: true, // Disable tooltip on hover
+              },
+            },
+            responsive: true, // Make the chart responsive
+          };
+
+          const ctx = document.getElementById(chartId).getContext("2d");
+          const doughnutChart = new Chart(ctx, {
+            type: "doughnut",
+            data: data,
+            options: options,
+          });
+        }
+
+        function addAlertChart(deviceId) {
+          const chartInfo = document.querySelector(".alert-chartInfo");
+          chartInfo.innerHTML ="";
+          fetch(`/network/alertInfo/${deviceId}`)
+            .then((response) => response.json())
+            .then((alertData) => {
+              renderDonutChart("alert-chart1", alertData);
+              chartInfo.innerHTML = `<div>
+              <div class="status"><div class="box red-box"></div>Critical-Active : ${alertData.criticalAct}</div> 
+              <div class="status"><div class="box orange-box"></div>Warning-Active   : ${alertData.warningAct}</div>
+              <div class="status"><div class="box blue-box"></div>Critical-Solved  : ${alertData.criticalSol}</div>
+              <div class="status"><div class="box green-box"></div>Warning-Solved   : ${alertData.warningSol}</div>
+             </div>`;
+            });
+        }
+
+        
+
+        function renderTrafficLineChart(deviceId) {
+          const existingChart = Chart.getChart("lineChart-0");
+          if (existingChart) {
+            existingChart.destroy();
+          }
+          const ctx = document.getElementById("lineChart-0").getContext("2d");
+
+          fetch(`/network/traffic/${deviceId}`)
+            .then((response) => response.json())
+            .then((trafficData) => {
+              const datasets = [
+                {
+                  label: "Inbound Traffic",
+                  data: trafficData.map((entry) => ({
+                    x: new Date(entry.timestamp),
+                    y: entry.inboundtraffic,
+                  })),
+                  borderColor: "rgba(0,255,246, 0.9)",
+                  borderWidth: 2,
+                  fill: false,
+                },
+                {
+                  label: "Outbound Traffic",
+                  data: trafficData.map((entry) => ({
+                    x: new Date(entry.timestamp),
+                    y: entry.outboundtraffic,
+                  })),
+                  borderColor: "rgba(132,0,255, 0.9)",
+                  borderWidth: 2,
+                  fill: false,
+                },
+              ];
+              new Chart(ctx, {
+                type: "line",
+                data: {
+                  datasets: datasets,
+                },
+                options: {
+                  scales: {
+                    x: {
+                      type: "time",
+                      position: "bottom",
+                      time: {
+                        unit: "hour",
+                        parser: "YYYY-MM-DDTHH:mm:ssZ",
+                        tooltipFormat: "MMM D, YYYY HH:mm:ss",
+                        displayFormats: {
+                          hour: "HH:mm",
+                          day: "MMM D, YYYY",
+                        },
+                      },
+                      ticks: {
+                        color: "black",
+                        callback: function (value, index, values) {
+                          // Display date only at midnight (12 AM)
+                          if (new Date(value).getHours() === 0) {
+                            return new Date(value).toLocaleDateString();
+                          } else {
+                            return new Date(value).toLocaleTimeString([], {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            });
+                          }
+                        },
+                        maxTicksLimit: 15,
+                      },
+                    },
+                    y: {
+                      title: {
+                        display: true,
+                        text: "Traffic",
+                        color: "black",
+                      },
+                      ticks: {
+                        color: "black",
+                      },
+                    },
+                  },
+                  plugins: {
+                    legend: {
+                      display: true,
+                      labels: {
+                        color: "black", // Set the text color of the legend items
+                      },
+                    },
+                  },
+                },
+              });
+            });
+        }
+        
+
+        function makeAlertTable1(deviceId, selectedDeviceTypes) {
+          fetch(`/network/alert-table/${deviceId}`)
+            .then((response) => response.json())
+            .then((allAlertsRow) => {
+              const allAlerts = selectedDeviceTypes.includes("All")
+                ? allAlertsRow
+                : allAlertsRow.filter((alert) => {
+                    const isReviewStatusMatch = selectedDeviceTypes.includes(
+                      alert.reviewstatus
+                    );
+                    const isStatusMatch = selectedDeviceTypes.includes(
+                      alert.status
+                    );
+                    if (selectedDeviceTypes.length === 1)
+                      return isReviewStatusMatch || isStatusMatch;
+                    else return isReviewStatusMatch && isStatusMatch;
+                  });
+              const tableBody = document.querySelector(".Alert-table tbody");
+              tableBody.innerHTML = "";
+              allAlerts.forEach((alert) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                        <td>${alert.alertID}</td>
+                        <td>${alert.deviceid}</td>
+                        <td>${alert.message}</td>
+                        <td>${alert.status}</td>
+                        <td>${alert.reviewstatus}</td>
+                    `;
+                tableBody.appendChild(row);
+              });
+            });
+        }
+        
+        function renderLineChart(lineChartId, flotData, yAxis, label) {
+          const existingChart = Chart.getChart(lineChartId);
+          if (existingChart) {
+            existingChart.destroy();
+          }
+          const ctx = document.getElementById(lineChartId).getContext("2d");
+
+          // Extract device IDs
+          // const deviceIds = devices.map((device) => device.deviceID);
+          // Create a dataset for each device
+
+          const datasets = [{
+            label: yAxis,
+            data: flotData.map((entry) => ({
+              x: new Date(entry.timestamp),
+              y: entry[yAxis],
+            })),
+            borderColor: "rgba(0,255,246, 0.9)",
+            borderWidth: 2,
+            fill: false,
+          }];
+
+          new Chart(ctx, {
+            type: "line",
+            data: {
+              datasets: datasets,
+            },
+            options: {
+              scales: {
+                x: {
+                  type: "time",
+                  position: "bottom",
+                  time: {
+                    unit: "hour",
+                    parser: "YYYY-MM-DDTHH:mm:ssZ",
+                    tooltipFormat: "MMM D, YYYY HH:mm:ss",
+                    displayFormats: {
+                      hour: "HH:mm",
+                      day: "MMM D, YYYY",
+                    },
+                  },
+                  ticks: {
+                    color: "black",
+                    callback: function (value, index, values) {
+                      // Display date only at midnight (12 AM)
+                      if (new Date(value).getHours() === 0) {
+                        return new Date(value).toLocaleDateString();
+                      } else {
+                        return new Date(value).toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        });
+                      }
+                    },
+                    maxTicksLimit: 15,
+                  },
+                },
+                y: {
+                  title: {
+                    display: true,
+                    text: label,
+                    color: "black",
+                  },
+                  ticks: {
+                    color: "black",
+                  },
+                },
+              },
+              plugins: {
+                legend: {
+                  display: false,
+                },
+              },
+            },
+          });
+        }
+
+        function loadAllCharts(){
+          addBasic(DeviceID);
+        addAlertChart(DeviceID);
+        renderTrafficLineChart(DeviceID);
+        makeAlertTable1(DeviceID,select3.value.split("&").map((type) => type.trim()));
+
+        fetch(`/network/get-packet/${DeviceID}`)
+          .then((response) => response.json())
+          .then((packetLossData) => {
+            renderLineChart(
+              "lineChart-1",
+              packetLossData,
+              "packetLossRate",
+              "Packet Loss Rate (%)"
+            );
+          });
+          fetch(`/network/get-throughput/${DeviceID}`)
+          .then((response) => response.json())
+          .then((throughputData) => {
+            renderLineChart(
+              "lineChart-2",
+              throughputData,
+              "throughput",
+              "Throughput (Mbps)"
+            );
+          });
+          fetch(`/network/get-latency/${DeviceID}`)
+          .then((response) => response.json())
+          .then((latencyData) => {
+            renderLineChart(
+              "lineChart-3",
+              latencyData,
+              "latency",
+              "latency (ms)"
+            );
+          });
+          fetch(`/network/get-uptime/${DeviceID}`)
+          .then((response) => response.json())
+          .then((uptimeData) => {
+            renderLineChart(
+              "lineChart-4",
+              uptimeData,
+              "uptime",
+              "uptime (%)"
+            );
+          });
+        }
+        loadAllCharts();
+
+          select1.addEventListener('change', function(){
+            DeviceID=select1.value;
+            loadAllCharts();
+          });
+          select3.addEventListener('change', function(){
+            makeAlertTable1(DeviceID,select3.value.split("&").map((type) => type.trim()));
+          });
+      });
+    </script>
+  </body>
+</html>

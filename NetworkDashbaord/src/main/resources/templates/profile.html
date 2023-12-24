@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Title</title>
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>    
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+    <style>
+      body{
+        box-sizing: border-box;
+        display: block;
+        margin: 0;
+        /* overflow: hidden; */
+      }
+      .sidebar{
+        width: 20%;
+        position: fixed;
+        background-color: rgb(21, 20, 20);
+        height: 100vh;
+        color: #fff;
+        text-align: center;
+      }
+      .mainBody{
+        margin-left: 20%;
+      }
+      #home{
+        position: relative;
+      }
+
+      .social,.profileImg {
+        width: 100%;
+      }
+      .profileImg{
+        display: flex;
+        justify-content: center;
+        margin: .4rem 0 .3rem 0;
+        
+      }
+      .socialLink{
+        text-decoration: none;
+        color: white;
+      }
+      .socialLink:hover{
+        color: rgb(0, 153, 255);
+      }
+      .name{
+        padding-bottom: 0.3rem;
+      }
+      .social{
+        display: flex;
+        justify-content: space-evenly;
+      }
+      .icon{
+        height: 30px;
+        width: 30px;
+        background-color:rgb(53, 53, 53) ;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+      }
+
+        .rounded-circle{
+          width: 100px;
+          height: 100px;
+          object-fit:fill;
+          border: 5px solid rgb(53, 53, 53);
+        }
+        .profile{
+          display: grid;
+          grid-template-rows: auto;
+        }
+        .background-img{
+          height:100vh;
+          width: 100%;
+          object-fit:cover;
+          
+        }
+        button {
+          position: absolute;
+          padding: 10px 20px;
+          border: none;
+          text-decoration: none;
+          display: inline-block;
+          cursor: pointer;
+          font-size: 16px;
+          margin: 5px;
+          border-radius: 10px;
+          text-shadow:1px 1px 2px black; 
+          box-shadow: 1px 1px 2px black;
+        }
+
+        /* Styling the "Hire Me" button */
+        .hire-button {
+          background-color:  #ff0000 ;/* Green */
+          color: white;
+          font-weight: 500;
+          bottom: 20%;
+          left: 15%;
+        }
+
+        /* Styling the "Download Resume" button */
+        .download-button {
+          background-color: #2076ee; /* Blue */
+          color: white;
+          bottom: 20%;
+          right: 15%;
+          font-weight: 500;
+        }
+        .download-button:hover {
+            outline-color: transparent;
+            outline-style:solid;
+            box-shadow: 0 0 4px 3px #ffffff;
+        }
+        .hire-button:hover {
+            outline-color: transparent;
+            outline-style:solid;
+            box-shadow: 0 0 4px 3px #ffffff;
+        }
+        ul{
+          list-style: none;
+          padding-left: 0;
+        }
+        .pageList li{
+          color: rgb(152, 152, 152);
+          margin: 1.8rem 0 1.8rem 0;
+          position: relative;
+          white-space: nowrap;
+        }
+        .pageList li:hover{
+          color: #ffffff;
+        }
+        .pageList li a i {
+          color: rgb(152, 152, 152);
+          transition: color 0.3s; 
+        }
+
+        .pageList li:hover a i {
+          color: rgb(18, 148, 255);
+        }
+        .subTitle::after {
+          margin-top: 0.8rem;
+          content: "";
+          /* position: absolute; */
+          display: block;
+          width: 50px;
+          height: 3px;
+          background: #149ddd;
+          bottom: 0;
+          left: 0;
+        }
+        .subSection{
+          padding: 2rem 1.5rem 2rem 1.5rem;
+        }
+        .space1{
+          margin-top: 0.2rem;
+        }
+        #about li{
+          margin: 0.2rem 0 1rem 1.5rem;
+
+        }
+        #about img{
+          margin-left: 1rem;
+          border: 3px solid rgb(30, 80, 121);
+          box-shadow: 1px 1px 5px;
+        }
+        #skills{
+          background-color: #f2faff;
+        }
+        
+        .skill-container {
+          width: 100%;
+          background-color: #ddd;
+          margin:0.5rem 0 1rem 0;
+        }
+
+        .skillBar {
+          text-align: right;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          color: white;
+          background-color: #149ddd;
+        }
+        .val{
+          float: right;
+        }
+
+
+        .java {width: 80%; }
+        .html {width: 95%; }
+        .css {width: 75%;}
+        .js {width: 40%;}
+        .python {width: 40%; }
+        .iot {width: 70%; }
+        .dsa {width: 70%;}
+        .cn {width: 70%;}
+        .sql {width: 60%; }
+        .dbms {width: 65%; }
+        .aws {width: 60%;}
+        .esd {width: 80%;}
+        .photograph {width: 90%;}
+        .ps {width: 50%;}
+
+        .resumeItem::before {
+          content: "";
+          position: absolute;
+          width: 16px;
+          height: 16px;
+          border-radius: 50px;
+          left: -9px;
+          top: 5px;
+          background: #fff;
+          border: 2px solid #1f5297;
+        }
+        .resumeItem{
+          position: relative;
+          margin-top: -2px; 
+          border-left: 2px solid #1f5297;
+          padding: 0 0 1rem 1rem;
+        }
+        .resumeItem ul{
+          margin:0;
+        }
+        .resumeItem li{
+          margin-left: 1rem;
+          font-size: 10pt;
+          list-style:disc;
+        }
+        h6{
+          margin-bottom: 0;
+        }
+        .date{
+          font-size: small;
+          padding: 2px;
+          font-weight: 500;
+          background-color: #c7ddff;
+        }
+        /* .Pro2Img{ */
+          /* display: flex; */
+          /* float: right; */
+          /* width: 100%;
+          align-items: center;
+          justify-content: center; */
+        /* } */
+        .pro2{
+          width: 50%;
+          float: right;
+        }
+        #Badge{
+          background-color: #d2eefe;
+        }
+
+        .cbedge{
+          width: 120px;
+          height: 120px;
+          /* float: right; */
+        }
+        .right{
+          float: right;
+        }
+        .left{
+          float: left;
+          margin-right: 1rem;
+        }
+
+        .allBadge{
+          margin-top: 1.5rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;  
+          /* justify-content: center; */
+        }
+        .badgeBox{
+          width: 90%;
+          background-color: #fff;
+          padding: 1rem;
+          border-radius: 1rem;
+          box-shadow: -2px 2px 3px;
+          margin: 0.5rem 0 0.5rem 0;
+          font-size: 9pt;
+        }
+        .badgeBox:nth-child(even) {
+          box-shadow: 2px 2px 3px;
+        }
+        .noMarg{
+          margin-bottom: 0 ;
+        }
+        .BSkill{
+          font-size: small;
+          font-weight: 500;
+        }
+        .BSkillBox{
+          display: flex;
+          flex-wrap: wrap;
+        }
+        .BSkills{
+          color: #fff;
+          padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+          border-radius: 1rem;
+          background-color: #149ddd;
+          margin: 0.4rem;
+        }
+        .BadgeLink{
+          color: black;
+          text-decoration: none;
+        }
+        .BadgeLink:hover{
+          text-decoration: underline;
+        }
+        .imgs1, .imgs2{
+          width: 100%;
+          padding: 0.5rem;
+          border: 1px solid black;
+        }
+        .carousel-imgs1 img{
+          width: 180px;
+          height: max-content;
+        }
+        .carousel-imgs2 img{
+          width: 300px;
+          /* height: max-content; */
+        }
+        .carousel-imgs1,.carousel-imgs2 {
+          margin: 5px; /* Add margin for spacing between images */
+          border-radius: 5px;
+
+        }
+    
+
+        .contects{
+          display: flex;
+          justify-content: space-around;
+        }
+        .contectLink{
+          text-decoration: none;
+          color: black;
+        }
+
+        .carousel-imgs1,.carousel-imgs2,.pro2 {
+          border-radius: 5px;
+          cursor: pointer;
+          transition: 0.3s;
+        }
+
+        /* The Modal (background) */
+        .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          padding-top: 50px;
+          left: 0;
+          top: 0;
+          height: 100%;
+
+          width:100%;
+          background-color: rgb(0, 0, 0);
+          background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+          margin: auto;
+          display: block;
+          max-width: 100%; 
+          height: auto; 
+        }
+
+
+        .modal-content,
+        #caption {
+          -webkit-animation-name: zoom;
+          -webkit-animation-duration: 0.6s;
+          animation-name: zoom;
+          animation-duration: 0.6s;
+        }
+
+        @-webkit-keyframes zoom {
+          from {
+            -webkit-transform: scale(0);
+          }
+
+          to {
+            -webkit-transform: scale(1);
+          }
+        }
+
+        @keyframes zoom {
+          from {
+            transform: scale(0);
+          }
+
+          to {
+            transform: scale(1);
+          }
+        }
+
+        .close {
+          position: absolute;
+          top: 15px;
+          right: 35px;
+          color: #f1f1f1;
+          font-size: 40px;
+          font-weight: bold;
+          transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+          color: #bbb;
+          text-decoration: none;
+          cursor: pointer;
+        }
+
+        @media only screen and (max-width: 700px) {
+          .modal-content {
+            height: 100vh;
+          }
+        }
+        .appImg{
+          height: 120px;
+          width: auto;
+        }
+        #contect{
+          background-color:#e3f3ff ;
+        }
+        #Photography{
+          padding-left: 0;
+          padding-right: 0;
+        }
+        .photoBlock{
+          padding: 0 1.5rem 0 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="mainDiv">
+      <nav class="sidebar">
+        <div class="profileImg">
+          <img  class="rounded-circle shadow-4-strong img-fluid "  src="gopal.jpeg" alt="">
+        </div>
+        <h5 class="name">Gopal Vaman Naik</h5>
+        <div class="social">
+          <a href="https://www.linkedin.com/in/gopal-naik-35b630202" class="socialLink" ><div class="icon"><i class="fa fa-linkedin"></i></div></a>
+          <a href="mailto:gopalvamannaik@gmail.com" class="socialLink"><div class="icon"><i class="fa fa-envelope"></i></div></a>
+          <a href="https://www.instagram.com/ajju_ajaynaik?igshid=OGQ5ZDc2ODk2ZA==" class="socialLink" ><div class="icon"><i class="fa fa-instagram"></i></div></a>
+          <a href="https://wa.me/+918971125701" class="socialLink" ><div class="icon"><i class="fa fa-whatsapp"></i></div></a>
+        </div>
+        <div  class="pageContent ">
+          <ul class="pageList">
+            <li><a href="#home" class="nav-link scrollto active"><i class="fa fa-home"></i> <span>Home</span></a></li>
+            <li><a href="#about" class="nav-link scrollto"><i class="fa fa-user"></i> <span>About</span></a></li>
+            <li><a href="#skills" class="nav-link scrollto"><i class="fa fa-cogs"></i> <span>Skills</span></a></li>
+            <li><a href="#resume" class="nav-link scrollto"><i class="fa fa-file"></i> <span>Resume</span></a></li>
+            <li><a href="#Badge" class="nav-link scrollto"><i class="fa fa-id-badge"></i> <span>Badges</span></a></li>
+            <li><a href="#contect" class="nav-link scrollto"><i class="fa fa-envelope"></i> <span>Contact</span></a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="mainBody">
+        <div id="home">
+          <button class="hire-button but1" onclick="window.location.href='mailto:gopalvamannaik@gmail.com';">Hire Me</button>
+          <a href="Gopal_Vaman_Naik_Resume.pdf" download><button class="download-button but1">Download Resume</button></a>
+          
+          <img class="background-img" src="gopalFull.png" alt="">
+        </div>
+        <div id="about" class="subSection">
+          <h1 class="subTitle" >About</h1>
+          <div class="space1"></div>
+          <p> Self-motivated and confident independent engineering student, dedicated to pursuing excellence through a proactive approach to learning and problem-solving. Passionate about innovation and committed to continuous growth in both academic and practical settings.</p>
+          <div class="row">
+            <div class="col-lg-4 p-0">
+              <img src="gopal.jpeg" alt="" class="img-fluid">
+            </div>
+            <div class="col-lg-8">             
+                  <ul class="aboutList">
+                    <li><i class="fa fa-chevron-right"></i> <strong>Birthday:</strong> <span>19 April 2001</span></li>
+                    <li><i class="fa fa-chevron-right"></i> <strong>Age:</strong> <span>22</span></li>
+                    <li><i class="fa fa-chevron-right"></i> <strong>Degree:</strong> <span>B.E (Final Year)</span></li>
+                    <li><i class="fa fa-chevron-right"></i> <strong>Phone:</strong> <span>+91 8971125701</span></li>
+                    <li><i class="fa fa-chevron-right"></i> <strong>City:</strong> <span>Bangalore, India</span></li>
+                    <li><i class="fa fa-chevron-right"></i> <strong>Email:</strong> <span>gopalvamannaik@gmail.com</span></li>
+                  </ul>
+            </div>
+          </div>
+        </div>
+        <!-- ======= Skills Section ======= -->
+        <section id="skills" class="skills section-bg subSection">
+        <div class="container">
+
+        <div class="section-title">
+          
+          <h1 class="subTitle">Skills</h1>
+          <div class="space1"></div>
+          <p>Fast Learner and Adaptable Professional: Proven ability to quickly grasp new concepts, technologies, and methodologies. Adept at adjusting to evolving industry trends and seamlessly incorporating new skills into my repertoire.
+          </p>
+        </div>
+
+        <div class="row skills-content">
+          <div class="col-lg-6" data-aos="fade-up">
+            <span>JAVA <span class="val">80%</span> </span>
+            <div class="skill-container">
+                <div class="skillBar java"></div>
+            </div>
+            <span>HTML <span class="val">95%</span> </span>
+            <div class="skill-container">
+                <div class="skillBar html"></div>
+            </div>
+            <span>CSS <span class="val">75%</span> </span>
+            <div class="skill-container">
+                <div class="skillBar css"></div>
+            </div>
+            <span>JAVASCRIPT <span class="val">40%</span> </span>
+            <div class="skill-container">
+                <div class="skillBar js"></div>
+            </div>
+            <span>Python<span class="val">40%</span> </span>
+            <div class="skill-container">
+                <div class="skillBar python"></div>
+            </div>
+            <span>IoT<span class="val">70%</span> </span>
+            <div class="skill-container">
+                <div class="skillBar iot"></div>
+            </div>
+            <span>Photography<span class="val">90%</span> </span>
+            <div class="skill-container">
+                <div class="skillBar photograph"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100"> 
+            <span>DSA <span class="val">70%</span> </span>
+            <div class="skill-container">
+                <div class="skillBar dsa"></div>
+            </div>
+            <span>Computer Networks<span class="val">70%</span> </span>
+            <div class="skill-container">
+                <div class="skillBar cn"></div>
+            </div>
+            <span>SQL <span class="val">60%</span> </span>
+            <div class="skill-container">
+                <div class="skillBar sql"></div>
+            </div>
+            <span>DBMS <span class="val">65%</span> </span>
+            <div class="skill-container">
+                <div class="skillBar dbms"></div>
+            </div>
+            <span>AWS <span class="val">60%</span> </span>
+            <div class="skill-container">
+                <div class="skillBar aws"></div>
+            </div>
+            <span>Embedded System <span class="val">80%</span> </span>
+            <div class="skill-container">
+                <div class="skillBar esd"></div>
+            </div>   
+            <span>Photoshop <span class="val">50%</span> </span>
+            <div class="skill-container">
+                <div class="skillBar ps"></div>
+            </div>  
+          </div>
+        </div>
+      </div>
+      </section>
+      <section id="resume" class="subSection">
+        <h1 class="subTitle">Resume</h1>
+        <div class="space1"></div>
+        <p>A results-oriented, hardworking, and self-motivated B.E. student, actively seeking a challenging career opportunity to apply my coding expertise and enhance my skills. Possessing strong knowledge in Java, SQL, AWS, HTML, CSS, and Operating Systems, I am well-equipped to contribute effectively to projects. I have a demonstrated ability to learn and adapt to new skills and technologies dynamically.</p>
+        <div class="row">
+          <div class="col-lg-6 p-0">
+            <div class="education">
+              <h3>Education</h3>
+              <div class="resumeItem">
+                <h4>B.E.</h4>  
+                <h7 class="date">2021 - 2024</h7>             
+                <h6>RV College of Engineering</h6>
+                <h7>Bangalore, India.</h7><br>
+                <h7>Electronics and Communication Engineering</h7>
+              </div>
+              <div class="resumeItem">
+                <h4>Diploma</h4>  
+                <h7 class="date">2017 - 2021</h7>             
+                <h6>Shree Vidyadhiraj Polytechnic</h6>
+                <h7>Kumta, India</h7><br>
+                <h7>Electronics and Communication Engineering</h7>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 p-0">
+            <div class="internship">
+              <h3>Internship</h3>
+              <div class="resumeItem">
+                <h4>Embedded System Design</h4>  
+                <h7 class="date">Jan 2021 - Jun 2021</h7>             
+                <h6>MITRONTECH</h6>
+                <h7>Bangalore, India.</h7>
+                <ul>
+                  <li>I worked on customer projects from start to finish, including design, implementation, and testing.</li>
+                  <li>Maintained real-time Embedded systems, including troubleshooting and resolving issues.</li>
+                  <li>Designed and implemented solutions for multiple domains, including the Air Force and Indian Railways.</li>
+                  <li>Worked with a team of engineers to design and implement complex systems.</li>
+                  <li>Provided technical support to customers.</li>
+                  <li>Learned about the latest Embedded systems technologies and best practices.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div id="projects">
+            <h3>Projects</h3>
+              <div class="resumeItem">
+                <h4>Network Devices  Monitoring Dashboard</h4>  
+                <h7 class="date">Nov 2023 - Dec 2023</h7>             
+                <h6>Project Overview:</h6>
+                <ul>
+                <li>Developed a comprehensive Network Dashboard for real-time monitoring and analysis of network health.</li>
+                <li>Utilized web technologies, including HTML, CSS, JavaScript, Java, SQL and AWS, to create an interactive and user-friendly interface.</li>
+                </ul>
+                <h6>Data Visualization:</h6>
+                <ul>
+                <li>Implemented dynamic charts using the Chart.js library to visualize key network metrics such as latency, throughput, packet loss rate, and device uptime.</li>
+                <li>Employed various chart types, including line charts, scatter plots, and bar charts, to provide a holistic view of network performance.</li>
+                </ul>
+                <h6>Device Status Monitoring:</h6>
+                <ul>
+                  <li>Developed status indicators (online/offline) using donut charts for routers, switches, and servers, offering an immediate overview of device health.</li>
+                </ul>
+                <h6>Alert System:</h6>
+                <ul>
+                  <li>Implemented an alert system that dynamically populates an alert table with active issues, facilitating quick issue identification and resolution.</li>
+                </ul>
+                <h6>Device Information Carousel:</h6>
+                <ul><li>Designed an interactive carousel to showcase detailed information about each network device, providing additional insights into device type, status, and IP address.</li></ul>
+                <h6>Backend Integration:</h6>
+                <ul><li>Integrated the frontend with a backend server to fetch device status, health metrics, and other relevant data.</li></ul>
+              </div> 
+              <div class="resumeItem">
+                <h4>Development of Real-Time Crop Cultivation and Nutrient Recommendation System</h4>  
+                <h7 class="date">Jun 2023 - Aug 2023</h7>  
+                <img id="myImg" src="Agree.jpeg" alt="" class="img-fluid pro2">           
+                <h6>Project Overview:</h6>
+                <ul>
+                  <li>Spearheaded the development of an innovative Real-Time Crop Cultivation and Nutrient Recommendation System, leveraging cutting-edge technologies in IoT (Internet of Things), Machine Learning (ML), and cloud computing.</li>
+                </ul>
+                <h6>Problem Statement:</h6>
+                <ul>
+                  <li>Unavailability of a portable device for the nutrient recommendation which provides instant result for a user specified crop with sensor data as input.</li>
+                </ul>
+                <h6>Technological Integration:</h6>
+                <ul>
+                  <li>Integrated NPK sensors and ESP32 microcontroller to create a portable and user-friendly solution for real-time data collection in agricultural fields.</li>
+                  <li>Established seamless communication between hardware components and cloud databases for efficient data processing.</li>
+                </ul>
+                <h6>ML Algorithm Implementation:</h6>
+                <ul>
+                  <li>Implemented advanced ML algorithms, including Naive Bayes, to analyze NPK sensor data and generate accurate predictions regarding the most suitable crops for specific land.</li>
+                </ul>
+                <h6>Cloud Computing:</h6>
+                <ul>
+                  <li>Utilized AWS Elastic Compute Cloud (AWS EC2) for hosting and deploying ML algorithms, ensuring scalability and reliability in processing large datasets.</li>
+                </ul>
+                <h6>Mobile Application Development:</h6>
+                <ul>
+                  <li>Developed a user-friendly mobile application using MIT App Inventor, providing farmers with a convenient interface to access real-time soil health data and make informed decisions.</li>
+                </ul>                
+              </div>
+              <div class="resumeItem">
+                <h4>Home Automation System</h4>  
+                <img id="myImg" src="/static/images/homeApp.jpg" alt="img" class="img-fluid pro2 appImg" >
+                <h7 class="date">Sep 2021 - Dec 2021</h7> 
+                <ul>
+                  <li>Architected IoT-based Home Automation System, that allows users to control their devices using a mobile app.</li>
+                  <li>Custom designs Based on Customer requirements.</li>
+                  <li>Tools used: Firebase, ESP32 controller, MIT App Inventor, EasyEDA, Arduino IDE.</li>
+                </ul>
+              </div>
+              <div class="resumeItem">
+                <h4>Real-time Railroad Crossings Safety System - Indian Railway </h4>  
+                <h7 class="date">Jan 2021 - Jun 2021</h7> 
+                <ul>
+                  <img id="myImg" src="/static/images/rail_2.jpg" alt="img" class="img-fluid pro2">
+                  <li>Developed and maintained a real-time Railroad Crossings Safety System to improve public safety and reduce work complexity for railway employees.</li>
+                  <li>The system uses automation to track trains and secure the railroad crossings, reducing the risk of accidents.</li>
+                  <li>Integrated data analytics tools to generate comprehensive reports on train movements, crossing activities, and system performance.</li>
+                  <li>24/7 System Monitoring and Supports</li>
+                </ul>
+              </div>
+          </div>
+        </div>
+      </section>
+      <section id="Badge" class="subSection">
+        <h1 class="subTitle">Badges</h1>
+        <div class="space1"></div>
+        <div class="allBadge">
+          <div class="badgeBox">
+            <img src="/templates/Badges/introduction-to-iot.png" alt="" class="img-fluid cbedge left">
+            <a href="https://www.credly.com/badges/2faace5d-3d10-46ab-8c20-009990daad99/public_url" class="BadgeLink"><h5>Introduction to IoT</h5></a>
+            <p class="noMarg">Issued by <a href="https://www.credly.com/organizations/cisco/badges">Cisco</a></p>
+            <span class="BSkill">Skills :</span>
+            <div class="BSkillBox"><div class="BSkills" >IoT</div><div class="BSkills" >Internet Of Things</div>
+              <div class="BSkills" >Digital Transformation
+            </div></div>
+          </div>
+          <div class="badgeBox">
+            <img src="/templates/Badges/introduction-to-packet-tracer.png" alt="" class="img-fluid cbedge right">
+            <a href="https://www.credly.com/badges/dbe5ebcd-4de5-42b9-8189-7dcaf650c4be/public_url" class="BadgeLink"><h5>Introduction to Packet Tracer</h5></a>
+            <p class="noMarg">Issued by <a href="https://www.credly.com/organizations/cisco/badges">Cisco</a></p>
+            <span class="BSkill">Skills :</span>
+            <div class="BSkillBox">
+              <div class="BSkills" >Cisco Packet Tracer</div>
+              <div class="BSkills" >IoT Simulation</div>
+              <div class="BSkills" >Network Simulation</div>
+            </div>
+          </div>
+          <div class="badgeBox">
+            <img src="/templates/Badges/operating-systems-basics.png" alt="" class="img-fluid cbedge left">
+            <a href="https://www.credly.com/badges/fc90107c-3836-4665-9ce5-0500db64a025/public_url" class="BadgeLink"><h5>Operating Systems Basics</h5></a>
+            <p class="noMarg">Issued by <a href="https://www.credly.com/organizations/cisco/badges">Cisco</a></p>
+            <span class="BSkill">Skills :</span>
+            <div class="BSkillBox">
+              <div class="BSkills" >Windows</div>
+              <div class="BSkills" >Operating System Security</div>
+              <div class="BSkills" >Linux</div>
+              <div class="BSkills" >Mobile Network Connectivity</div>
+            </div>
+          </div>
+          <div class="badgeBox">
+            <img src="/templates/Badges/python-essentials-1.1.png" alt="" class="img-fluid cbedge right">
+            <a href="https://www.credly.com/badges/287256ac-690d-4057-9e72-31751be36a10/public_url" class="BadgeLink"><h5>Python Essentials 1</h5></a>
+            <p class="noMarg">Issued by <a href="https://www.credly.com/organizations/cisco/badges">Cisco</a></p>
+            <span class="BSkill">Skills :</span>
+            <div class="BSkillBox">
+              <div class="BSkills" >Algorithmic Thinking</div>
+              <div class="BSkills" >Analytical Thinking</div>
+              <div class="BSkills" >Basic Python Programming</div>
+              <div class="BSkills" >Entry-level</div>
+              <div class="BSkills" >Entry-level</div>
+              <div class="BSkills" >Computer Programming</div>
+            </div>
+          </div>
+          <div class="badgeBox">
+            <img src="/templates/Badges/aws-knowledge-cloud-essentials.png" alt="" class="img-fluid cbedge left">
+            <a href="https://www.credly.com/badges/80a8c7ff-31b2-45ea-8e8c-2e6d4f8f632d/public_url" class="BadgeLink"><h5>AWS Knowledge: Cloud Essentials</h5></a>
+            <p class="noMarg">Issued by <a href="https://www.credly.com/organizations/amazon-web-services/badges">Amazon Web Services Training and Certification</a></p>
+            <span class="BSkill">Skills :</span>
+            <div class="BSkillBox">
+              <div class="BSkills" >Amazon Web Services (AWS)</div>
+              <div class="BSkills" >AWS Cloud</div>
+              <div class="BSkills" >AWS Compute</div>
+              <div class="BSkills" >AWS Databases</div>
+              <div class="BSkills" >AWS Networking</div>
+              <div class="BSkills" >AWS Security</div>
+              <div class="BSkills" >AWS storage</div>
+            </div>
+          </div>
+          <div class="badgeBox">
+            <img src="/templates/Badges/aws-cloud-quest-cloud-practitioner.png" alt="" class="img-fluid cbedge right">
+            <a href="https://www.credly.com/badges/23af56c0-5a6b-496b-86c9-d107e446d18d/public_url" class="BadgeLink"><h5>AWS Cloud Quest: Cloud Practitioner</h5></a>
+            <p class="noMarg">Issued by <a href="https://www.credly.com/organizations/amazon-web-services/badges">Amazon Web Services Training and Certification</a></p>
+            <span class="BSkill">Skills :</span>
+            <div class="BSkillBox">
+              <div class="BSkills" >Amazon Web Services (AWS)</div>
+              <div class="BSkills" >AWS Cloud</div>
+              <div class="BSkills" >AWS Cloud Computing</div>
+              <div class="BSkills" >AWS Cloud Foundations</div>
+              <div class="BSkills" >Cloud Platform</div>
+            </div>
+          </div>          
+        </div>
+      </section>
+      <section id="Photography" class="subSection">
+        <div class="photoBlock">
+          <h1 class="subTitle">Photography</h1>
+        <div class="space1"></div>
+        <p>“I am not interested in shooting new things – I am interested to see things new.”
+        <h6>— Ernst Haas</h6>
+        </p>
+        </div>
+        <section>
+          <div class="imgs1 carousel" data-flickity='{"pageDots": false, "wrapAround": true , "groupCells": 1,"autoPlay": true, "pauseAutoPlayOnHover": false  }'>
+            <div class="carousel-imgs1"><img id="myImg" src="/templates/hieght/1.jpeg" alt="img1"></div>
+            <div class="carousel-imgs1"><img id="myImg" src="/templates/hieght/2.jpeg" alt="img2"></div>
+            <div class="carousel-imgs1"><img id="myImg" src="/templates/hieght/3.jpeg" alt="img3"></div>
+            <div class="carousel-imgs1"><img id="myImg" src="/templates/hieght/5.jpeg" alt="img5"></div>
+            <div class="carousel-imgs1"><img id="myImg" src="/templates/hieght/6.jpeg" alt="img6"></div>
+            <div class="carousel-imgs1"><img id="myImg" src="/templates/hieght/7.jpeg" alt="img7"></div>
+            <div class="carousel-imgs1"><img id="myImg" src="/templates/hieght/8.jpeg" alt="img8"></div>
+          </div>
+        </section>
+        <section>
+          <div class="imgs2 carousel" data-flickity='{"pageDots": false, "wrapAround": true , "groupCells": 1,"autoPlay": true}'>
+            <div class="carousel-imgs2"><img id="myImg" src="/templates/width/1.jpeg" alt="img1"></div>
+            <div class="carousel-imgs2"><img id="myImg" src="/templates/width/2.jpeg" alt="img2"></div>
+            <div class="carousel-imgs2"><img id="myImg" src="/templates/width/3.jpg" alt="img3"></div>
+            <div class="carousel-imgs2"><img id="myImg" src="/templates/width/4.jpeg" alt="img7"></div>
+            <div class="carousel-imgs2"><img id="myImg" src="/templates/width/5.jpeg" alt="img5"></div>
+            <div class="carousel-imgs2"><img id="myImg" src="/templates/width/6.jpeg" alt="img6"></div>
+            <div class="carousel-imgs2"><img id="myImg" src="/templates/width/7.jpeg" alt="img7"></div>
+            <div class="carousel-imgs2"><img id="myImg" src="/templates/width/8.jpeg" alt="img8"></div>
+            <div class="carousel-imgs2"><img id="myImg" src="/templates/width/9.jpeg" alt="img7"></div>
+            <div class="carousel-imgs2"><img id="myImg" src="/templates/width/10.jpeg" alt="img8"></div>
+          </div>
+        </section>
+        <div id="myModal" class="modal">
+          <span class="close">&times;</span>
+          <img class="modal-content" id="img01">
+        </div>
+      </section>
+      <section id="contect" class="subSection">
+        <h1 class="subTitle">Contact</h1>
+        <div class="space1"></div>
+        <div class="contects">
+          <a href="mailto:gopalvamannaik@gmail.com" class="contectLink"><div class=""><i class="fa fa-envelope"></i> gopalvamannaik@gmail.com</div></a>
+          <a href="https://wa.me/+918971125701" class="contectLink"><div class=""><i class="fa fa-phone"></i> +91 8971125701</div></a>
+        </div>
+      </section>
+      
+      </div>
+     
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script>
+      var modal = document.getElementById("myModal");
+
+      var images = document.querySelectorAll("#myImg");
+      var modalImg = document.getElementById("img01");
+      var captionText = document.getElementById("caption");
+
+      images.forEach(function (img, index) {
+        img.onclick = function () {
+          modal.style.display = "block";
+          modalImg.src = this.src;
+          captionText.innerHTML = this.alt;
+
+          var aspectRatio = this.naturalWidth / this.naturalHeight;
+          var maxWidth = window.innerWidth * .9; 
+          var maxHeight = window.innerHeight * .9; 
+          var widthByHeight = maxHeight * aspectRatio;
+          
+          if (widthByHeight > maxWidth) {
+            modalImg.style.width = maxWidth + "px";
+          } else {
+            modalImg.style.width = widthByHeight + "px";
+          }
+        };
+      });
+
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+    </script>
+   
+
+</body>
+</html>

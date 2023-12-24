@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Traffic</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon-16x16.png">
+    <link rel="manifest" href="/logo/site.webmanifest">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment" type="module"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        body {
+            padding: 1% 7% 1% 7%;
+            text-align: center;
+            height: 90%;
+        }
+
+        h1 {
+            padding-bottom: 1rem;
+        }
+
+        #select-2-container {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 7px 7px 0 0;
+            z-index: 2;
+        }
+
+        .heading-1 {
+            font-size: small;
+            font-weight: 150;
+            color: #fff;
+            border: 0;
+            background-color: rgb(4, 160, 219);
+            padding: 0.5rem 0.9rem 0.5rem 0.9rem;
+            border-radius: 1rem;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 8px;
+            z-index: 2;
+        }
+
+
+
+        .barChart {
+            position: relative;
+            background-color: rgba(242, 243, 243, 255);
+            border: 1.5px solid rgb(158, 158, 158);
+            border-radius: 0.5rem;
+            padding-top: 35px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Real-time Network Traffic</h1>
+
+<div class="barChart">
+    <button class="heading-1">Real-time Network Traffic</button>
+    <div id="select-2-container">
+        <select name="all-devices-selector" id="select-2">
+            <option value="All" selected="selected">All</option>
+            <option value="Router">Router</option>
+            <option value="Switch">Switch</option>
+            <option value="Server">Server</option>
+            <option value="Router & Switch">Router & Switch</option>
+            <option value="Router & Server">Router & Server</option>
+            <option value="Switch & Server">Switch & Server</option>
+        </select>
+    </div>
+    <canvas id="barChartCanvas"></canvas>
+</div>
+
+<script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        const select2 = document.getElementById('select-2');
+        let allDevicesData;
+
+        function fetchDataAndRenderChart() {
+            fetch('/network/devices')
+                .then(response => response.json())
+                .then(newAllDevicesData => {
+                    allDevicesData = newAllDevicesData;
+                    renderBarChart();
+                });
+        }
+
+        function renderBarChart() {
+            const existingChart = Chart.getChart("barChartCanvas");
+              if (existingChart) {
+                existingChart.destroy();
+              }
+            const selectedDeviceTypes = select2.value.split('&').map(type => type.trim());
+            const devices = selectedDeviceTypes.includes('All') ? allDevicesData : allDevicesData.filter(device => selectedDeviceTypes.includes(device.devicetype));
+            const deviceIds = devices.map(entry => entry.deviceID);
+            const inboundTraffic = devices.map(entry => entry.inboundTraffic);
+            const outboundTraffic = devices.map(entry => entry.outboundTraffic);
+
+            const ctx = document.getElementById('barChartCanvas').getContext('2d');
+            const barChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: deviceIds,
+                    datasets: [{
+                            label: 'Inbound',
+                            data: inboundTraffic,
+                            backgroundColor: 'rgba(0,255,246, 0.9)',
+                            borderColor: 'rgba(0,255,246, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Outbound',
+                            data: outboundTraffic,
+                            backgroundColor: 'rgba(132,0,255, 0.9)',
+                            borderColor: 'rgba(132,0,255, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeInOutQuart'
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            labels: {
+                                color: 'black' // Text color for legend labels
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Device ID',
+                                color: 'black'
+                            },
+                            ticks: {
+                                color: 'black' // Text color for x-axis labels
+                            }
+                        },
+                        y: { // Y-axis (traffic values)
+                            title: {
+                                display: true,
+                                text: 'Traffic in Kbps',
+                                color: 'black'
+                            },
+                            ticks: {
+                                color: 'black' // Text color for x-axis labels
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        fetchDataAndRenderChart();
+
+        // Responsiveness
+
+        select2.addEventListener('change', function(){
+            fetchDataAndRenderChart();
+            renderBarChart();
+        });
+        window.addEventListener('resize', function () {
+            renderBarChart();
+        });
+    });
+</script>
+
+</body>
+
+</html>

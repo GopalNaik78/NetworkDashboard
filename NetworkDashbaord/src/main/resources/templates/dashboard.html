@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">`
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Devices</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon-16x16.png">
+    <link rel="manifest" href="/logo/site.webmanifest">
+    <!-- Include Chart.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1{
+            text-align: center;
+        }
+
+        .all-devices {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        img.device-icon {
+            width: 30px;
+        }
+        .device-name{
+            text-decoration: underline;
+            color: #0000EE;
+        }
+        .device-name:hover{
+            color: #551A8B;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="all-devices">
+        <h1>All Devices</h1>
+        <table>
+           <thead>
+            <tr>
+                <th>Device</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>IP Address</th>
+                <th>Status</th>
+                <th>Inbound Traffic <br> (Kbps)</th>
+                <th>Outbound Traffic <br> (Kbps)</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- JavaScript code to fetch data and render the charts -->
+<script th:inline="javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+    // JavaScript code to populate the device data
+    fetch('/network/devices')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.querySelector('.all-devices tbody');
+            data.forEach(device => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><img src="/images/${device.devicetype.toLowerCase()}.png" alt="${device.devicetype}" class="device-icon"></td>
+                    <td>${device.deviceID}</td>
+                    <td class="device-name" data-device-id="${device.deviceID}">${device.devicename}</td>
+                    <td>${device.devicetype}</td>
+                    <td>${device.ipaddress}</td>
+                    <td>${device.devicestatus}</td>
+                    <td>${device.inboundTraffic}</td>
+                    <td>${device.outboundTraffic}</td>
+                `;
+                tableBody.appendChild(row);
+                const deviceNameCell = row.querySelector('.device-name');
+                    deviceNameCell.addEventListener('click', function () {
+                        // Extract the device ID from the data attribute
+                        var deviceId = this.getAttribute('data-device-id');
+                        console.log(deviceId);
+                        window.location.href = '/index/single?imgId=' + deviceId;
+                    });
+            });
+        });
+    });
+</script>
+</body>
+</html>
