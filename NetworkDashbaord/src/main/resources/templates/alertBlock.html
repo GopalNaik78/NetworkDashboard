@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,81 +10,8 @@
   <link rel="manifest" href="/logo/site.webmanifest">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment" type="module"></script>
-  <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: sans-serif;
-    }
-
-    body {
-        padding: 1% 7% 1% 7%;
-        text-align: center;
-        height: 90%;
-    }
-
-    h1 {
-        padding-bottom: 1rem;
-    }
-
-    #select-3-container {
-        position: absolute;
-        top: 0;
-        right: 0;
-        margin: 7px 7px 0 0;
-        z-index: 2;
-    }
-
-    .heading-1 {
-        font-size: medium;
-        font-weight: 150;
-        color: #fff;
-        border: 0;
-        background-color: rgb(4, 160, 219);
-        padding: 0.5rem 0.9rem 0.5rem 0.9rem;
-        border-radius: 1rem;
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        margin-top: 8px;
-        z-index: 2;
-    }
-
-
-    .Alert-table {
-        position: relative;
-        background-color: rgba(242, 243, 243, 255);
-        border: 1.5px solid rgb(158, 158, 158);
-        border-radius: 0.5rem;
-        padding-top: 50px;
-        max-width: 100%;
-        margin: 0 auto;
-    }
-    .tableFixHead {
-      overflow-y: auto;
-      /* max-height: 400px; */
-    }
-
-    table {
-      border-collapse: collapse;
-      width: 100%;
-    }
-
-    th,
-    td {
-      padding: 10px;
-      border: 1px solid #ddd;
-      text-align: left;
-    }
-
-    .thead-tr {
-      background-color: #f2f2f2;
-    }
-  </style>
+  <link rel="stylesheet" href="/CSS/alert.css">
 </head>
-
 <body>
 
 <h1>Alert Table</h1>
@@ -124,57 +50,7 @@
   <canvas id="barChartCanvas"></canvas>
 </div>
 
-<script th:inline="javascript">
-  document.addEventListener('DOMContentLoaded', function () {
-      const select3 = document.getElementById('select-3');
-      let allAlertData;
-
-      function fetchDataAndRenderTable() {
-          fetch('/network/alert-table')
-              .then(response => response.json())
-              .then(newAlertData => {
-                  allAlertData = newAlertData;
-                  renderAlertTable();
-              });
-      }
-
-      function renderAlertTable() {
-          const selectedAlertTypes = select3.value.split('&').map(type => type.trim());
-          const allAlerts = selectedAlertTypes.includes('All') ? allAlertData : allAlertData.filter(alert => {
-              const isReviewStatusMatch = selectedAlertTypes.includes(alert.reviewstatus);
-              const isStatusMatch = selectedAlertTypes.includes(alert.status);
-              if (selectedAlertTypes.length === 1)
-                  return isReviewStatusMatch || isStatusMatch;
-              else
-                  return isReviewStatusMatch && isStatusMatch;
-          });
-
-          const tableBody = document.querySelector('.Alert-table tbody');
-          tableBody.innerHTML = '';
-
-          allAlerts.forEach(alert => {
-              const row = document.createElement('tr');
-              row.innerHTML = `
-                  <td>${alert.alertID}</td>
-                  <td>${alert.deviceID}</td>
-                  <td>${alert.message}</td>
-                  <td>${alert.status}</td>
-                  <td>${alert.reviewstatus}</td>
-              `;
-              tableBody.appendChild(row);
-          });
-      }
-
-      fetchDataAndRenderTable();
-
-      select3.addEventListener('change', fetchDataAndRenderTable);
-
-      // Responsiveness
-      window.addEventListener('resize', function () {
-          renderAlertTable();
-      });
-  });
-</script>
+<script src="/JS/alert.js"></script>
 
 </body>
 

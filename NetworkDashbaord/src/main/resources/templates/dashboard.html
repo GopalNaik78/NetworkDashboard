@@ -11,46 +11,7 @@
     <!-- Include Chart.js library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        h1{
-            text-align: center;
-        }
-
-        .all-devices {
-            margin-top: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        img.device-icon {
-            width: 30px;
-        }
-        .device-name{
-            text-decoration: underline;
-            color: #0000EE;
-        }
-        .device-name:hover{
-            color: #551A8B;
-        }
-    </style>
+    <link rel="stylesheet" href="/CSS/allDevices.css">
 </head>
 <body>
 <div class="container">
@@ -76,36 +37,6 @@
 </div>
 
 <!-- JavaScript code to fetch data and render the charts -->
-<script th:inline="javascript">
-    document.addEventListener("DOMContentLoaded", function () {
-    // JavaScript code to populate the device data
-    fetch('/network/devices')
-        .then(response => response.json())
-        .then(data => {
-            const tableBody = document.querySelector('.all-devices tbody');
-            data.forEach(device => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td><img src="/images/${device.devicetype.toLowerCase()}.png" alt="${device.devicetype}" class="device-icon"></td>
-                    <td>${device.deviceID}</td>
-                    <td class="device-name" data-device-id="${device.deviceID}">${device.devicename}</td>
-                    <td>${device.devicetype}</td>
-                    <td>${device.ipaddress}</td>
-                    <td>${device.devicestatus}</td>
-                    <td>${device.inboundTraffic}</td>
-                    <td>${device.outboundTraffic}</td>
-                `;
-                tableBody.appendChild(row);
-                const deviceNameCell = row.querySelector('.device-name');
-                    deviceNameCell.addEventListener('click', function () {
-                        // Extract the device ID from the data attribute
-                        var deviceId = this.getAttribute('data-device-id');
-                        console.log(deviceId);
-                        window.location.href = '/index/single?imgId=' + deviceId;
-                    });
-            });
-        });
-    });
-</script>
+<script src="/JS/allDevices.js"></script>
 </body>
 </html>
