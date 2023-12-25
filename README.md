@@ -34,7 +34,7 @@ The Network Monitoring Dashboard is a web-based application designed to provide 
 ## Dashboard
 
 The dashboard (index) page serves as the main interface for monitoring and managing the network. It provides a comprehensive overview of various aspects of the network's performance and health. The dashboard image looks like the below:
-![dashboard looks like](path/to/image.png)
+![dashboard looks like](images/mainDashboard.png)
 
 ## Sidebar
 
