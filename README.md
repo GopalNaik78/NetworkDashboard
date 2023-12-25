@@ -12,16 +12,14 @@ The Network Monitoring Dashboard is a web-based application designed to provide 
 - [All Devices](#all-devices)
 - [Real-time Network Traffic](#real-time-network-traffic)
 - [Alert Table](#alert-table)
-- [Health Metrics](#health-metrics)
-  - [Packet Loss](#packet-loss)
+- [Health Monitor](#health-monitor)
+  - [Packet Loss Rate](#packet-loss-rate)
   - [Throughput](#throughput)
   - [Latency](#latency)
   - [Uptime](#uptime)
 - [Installation](#installation)
 - [Usage](#usage)
-- [File Structure](#file-structure)
 - [Dependencies](#dependencies)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Features
@@ -312,7 +310,7 @@ The snapshot above showcases the "Uptime" bar chart with devices color-coded bas
 
 Before you begin, ensure you have met the following requirements:
 
-- Java 11 or higher
+- Java 17 or higher
 - Maven
 - Your preferred IDE (IntelliJ IDEA recommended)
 - Localhost database (e.g., XAMPP) for development
