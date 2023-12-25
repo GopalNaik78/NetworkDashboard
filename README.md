@@ -428,6 +428,9 @@ The project utilizes a variety of tools and technologies to create a dynamic and
    - Install IntelliJ IDEA for Java development.
    - Set up XAMPP for a local web server environment.
 
+## License
+
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT) - see the [LICENSE](LICENSE) file for details.
 
 
 
