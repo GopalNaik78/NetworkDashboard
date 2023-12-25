@@ -37,6 +37,8 @@ The dashboard (index) page serves as the main interface for monitoring and manag
 
 ![dashboard looks like](images/mainDahboard.png)
 
+![dashboard looks like](images/dashboard2.png)
+
 ## Sidebar
 
 The sidebar serves as a navigation hub, providing quick access to individual charts for in-depth analysis. Each link corresponds to a specific chart category. Additionally, at the end of the sidebar, you'll find a link to the developer's profile website.
@@ -64,7 +66,7 @@ The Doughnut chart provides a quick and intuitive overview of the online status 
 
 ### Example Usage
 
-![Device Status Overview](/path/to/your/image.png)
+![Device Status Overview](images/Doughnut.png)
 
 In this example, the chart indicates that a majority of routers and switches are online, while a few servers are currently offline. This insight can prompt further investigation into the offline servers for maintenance or troubleshooting.
   
@@ -91,9 +93,15 @@ The "All Devices" section provides a comprehensive overview of all devices withi
 
 ### Example Snapshot
 
-![All Devices](/path/to/all-devices-snapshot.png)
+![All Devices](images/AllDevices.png)
 
 The snapshot above illustrates the "All Devices" section, showcasing devices with their respective images. Hovering over the device provides quick details, while clicking on a device image navigates to its individual dashboard for more detailed information.
+
+## Individual Device Details
+
+The "Individual Device Details" section in the dashboard provides comprehensive information about each device in the network. These details are accessible through a visually appealing and interactive interface.
+
+![All Devices](images/device.png)
 
 ## Real-Time Network Traffic
 
@@ -115,7 +123,7 @@ The "Real-Time Network Traffic" section provides a dynamic representation of net
 
 ### Example Snapshot
 
-![Real-Time Network Traffic](/path/to/network-traffic-snapshot.png)
+![Real-Time Network Traffic](images/Traffic.png)
 
 The snapshot above demonstrates the "Real-Time Network Traffic" section, displaying a bar chart with inbound and outbound traffic for each device.
 
@@ -143,7 +151,7 @@ The "Alert Table" section provides a comprehensive overview of alerts generated 
 
 ### Example Snapshot
 
-![Alert Table](/path/to/alert-table-snapshot.png)
+![Alert Table](images/AlertTable.png)
 
 The snapshot above illustrates the "Alert Table" section, showcasing a table with various alert details.
 
@@ -182,7 +190,7 @@ The "Health Monitor" block provides a holistic view of the network's health by m
 
 ### Example Snapshot
 
-![Health Monitor](/path/to/health-monitor-snapshot.png)
+![Health Monitor](images/health.png)
 
 The snapshot above provides a glimpse of the "Health Monitor" block, showcasing visualizations for Packet Loss Rate, Throughput, Latency, and Uptime.
 
@@ -211,7 +219,7 @@ The "Packet Loss Rate" chart visualizes the packet loss rate for each device ove
 
 ### Example Snapshot
 
-![Packet Loss Rate Chart](/path/to/packet-loss-chart-snapshot.png)
+![Packet Loss Rate Chart](images/PacketLoss.png)
 
 The snapshot above showcases the "Packet Loss Rate" chart with multiple devices represented by distinct lines.
 
@@ -240,7 +248,7 @@ The "Throughput" chart visualizes the throughput of each device over time, provi
 
 ### Example Snapshot
 
-![Throughput Chart](/path/to/throughput-chart-snapshot.png)
+![Throughput Chart](images/Throughput.png)
 
 The snapshot above showcases the "Throughput" chart with multiple devices represented by distinct lines.
 
@@ -268,7 +276,7 @@ The "Latency" chart visualizes the latency of each device over time using a scat
 
 ### Example Snapshot
 
-![Latency Scatter Chart](/path/to/latency-scatter-chart-snapshot.png)
+![Latency Scatter Chart](images/latency.png)
 
 The snapshot above showcases the "Latency" scatter chart with devices color-coded based on latency status.
 
@@ -296,9 +304,49 @@ The "Uptime" chart displays the average uptime of each device using a bar chart.
 
 ### Example Snapshot
 
-![Uptime Bar Chart](/path/to/uptime-bar-chart-snapshot.png)
+![Uptime Bar Chart](images/uptime.png)
 
 The snapshot above showcases the "Uptime" bar chart with devices color-coded based on average uptime status.
+
+## Dependencies
+
+The project utilizes a variety of tools and technologies to create a dynamic and feature-rich network dashboard. Below are the key dependencies and tools used in this project:
+
+1. **Front-End Dependencies:**
+   - [Flickity](https://flickity.metafizzy.co/): A responsive carousel library for horizontal image display.
+   - [Moment.js](https://momentjs.com/): A JavaScript library for parsing, validating, manipulating, and formatting dates.
+
+2. **Charting Libraries:**
+   - [Chart.js](https://www.chartjs.org/): A simple yet flexible JavaScript charting library for interactive charts.
+   - [Chart.js Adapter for Moment.js](https://github.com/chartjs/chartjs-adapter-moment): An adapter for using Moment.js with Chart.js for time-based charts.
+
+3. **Styling:**
+   - Custom CSS stylesheets for responsive and visually appealing user interfaces.
+
+4. **Back-End Dependencies:**
+   - [Spring Boot](https://spring.io/projects/spring-boot): A Java-based framework for creating stand-alone, production-grade Spring-based Applications.
+   - [H2 Database](https://www.h2database.com/): A lightweight, in-memory Java database.
+
+5. **Development Environment:**
+   - [IntelliJ IDEA](https://www.jetbrains.com/idea/): A popular integrated development environment (IDE) for Java development.
+   - [XAMPP](https://www.apachefriends.org/index.html): A cross-platform web server solution that includes Apache, MySQL, PHP, and Perl.
+
+### How to Install Dependencies
+
+1. **Front-End:**
+   - Link the Flickity and Moment.js libraries in the HTML files.
+   - Include the Chart.js and Chart.js Adapter for Moment.js scripts in the HTML files.
+   - Add custom CSS stylesheets for styling.
+
+2. **Back-End:**
+   - Set up a Spring Boot project using IntelliJ IDEA.
+   - Configure the project to use the H2 Database or another preferred database.
+   - Install required dependencies through Maven or Gradle.
+
+3. **Development Environment:**
+   - Install IntelliJ IDEA for Java development.
+   - Set up XAMPP for a local web server environment.
+
 
 
 
