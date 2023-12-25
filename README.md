@@ -308,6 +308,88 @@ The "Uptime" chart displays the average uptime of each device using a bar chart.
 
 The snapshot above showcases the "Uptime" bar chart with devices color-coded based on average uptime status.
 
+## Prerequisites
+
+Before you begin, ensure you have met the following requirements:
+
+- Java 11 or higher
+- Maven
+- Your preferred IDE (IntelliJ IDEA recommended)
+- Localhost database (e.g., XAMPP) for development
+
+## Installation
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/your-username/network-dashboard.git
+
+
+### Open the project in your IDE:
+
+Open the project using your preferred IDE. If you are using IntelliJ IDEA, open the project by selecting the pom.xml file.
+
+### Configure Database:
+
+Set up your localhost database (e.g., MySQL) and update the application.properties file in the src/main/resources directory with your database configurations.
+
+### Build and Run:
+
+Build and run the project using Maven:
+
+    mvn clean install
+    mvn spring-boot:run
+
+Access the Dashboard:
+Open your web browser and go to http://localhost:8080 to access the Network Dashboard.
+
+## Usage
+
+This network dashboard provides a comprehensive view of the network's health, real-time traffic, alerts, and individual device details. Below are the key features and instructions on how to use the dashboard:
+
+### 1. Dashboard Overview:
+
+- The dashboard presents an overview of the network's key parameters, including health, real-time traffic, alerts, and individual device details.
+
+### 2. All Devices Section:
+
+- **Horizontal Carousel:** Displays all devices in the network horizontally with images. Hovering over an image reveals basic information, and clicking on it navigates to an individual dashboard with detailed insights.
+
+### 3. Real-Time Network Traffic:
+
+- **Bar Chart:** Shows real-time inbound and outbound traffic for each device in kilobits per second (kbps).
+
+### 4. Alert Table:
+
+- **Table View:** Lists all alerts for each device, including complexity, review status, and messages. Users can filter alerts by status.
+
+### 5. Health Monitor:
+
+- **Packet Loss Rate:** Line chart depicting each device's packet loss rate over time, with filtering options.
+- **Throughput:** Line chart showing each device's throughput in megabits per second (Mbps), with filtering options.
+- **Latency:** Scatter chart illustrating each device's latency in milliseconds, color-coded for easy interpretation.
+- **Uptime:** Bar chart displaying the average uptime for each device, with color-coding for quick assessment.
+
+### 6. Individual Device Details:
+
+- Each device has its own dashboard with health, traffic, and alert information for detailed analysis.
+
+### 7. Dependencies:
+
+- Ensure the required dependencies, including Flickity, Moment.js, Chart.js, and Spring Boot, are properly linked and configured.
+
+### 8. Development Environment:
+
+- Use IntelliJ IDEA for Java development and XAMPP as a local server environment for testing.
+
+### How to Run:
+
+1. Clone the repository.
+2. Open the project in IntelliJ IDEA.
+3. Configure and start the Spring Boot application.
+4. Access the dashboard through a web browser.
+
+
 ## Dependencies
 
 The project utilizes a variety of tools and technologies to create a dynamic and feature-rich network dashboard. Below are the key dependencies and tools used in this project:
@@ -325,7 +407,6 @@ The project utilizes a variety of tools and technologies to create a dynamic and
 
 4. **Back-End Dependencies:**
    - [Spring Boot](https://spring.io/projects/spring-boot): A Java-based framework for creating stand-alone, production-grade Spring-based Applications.
-   - [H2 Database](https://www.h2database.com/): A lightweight, in-memory Java database.
 
 5. **Development Environment:**
    - [IntelliJ IDEA](https://www.jetbrains.com/idea/): A popular integrated development environment (IDE) for Java development.
